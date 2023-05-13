@@ -58,9 +58,110 @@ The LED segments are selected based on the decimal number. For example, if we wa
 
 ## PROGRAM:
 
+[2:19 PM, 5/13/2023] Krithik Raj SEC: int cnt=0; </br>
+int incPrev, decPrev; </br>
+void setup() </br>
+{ </br>
+  pinMode(0, INPUT); </br>
+  pinMode(3, INPUT); </br>
+  pinMode(5, INPUT); </br>
+  pinMode(13, OUTPUT); </br>
+  pinMode(12, OUTPUT); </br>
+  pinMode(11, OUTPUT); </br>
+  pinMode(10, OUTPUT); </br>
+  pinMode(9, OUTPUT); </br>
+  pinMode(8, OUTPUT); </br>
+  pinMode(7, OUTPUT); </br>
+  pinMode(6, OUTPUT); </br>
+} </br>
+void loop() </br>
+{ </br>
+int inc = digitalRead(3); </br>
+int dec = digitalRead(5); </br>
+int res = digitalRead(0); </br>
+{ </br>
+switch (cnt) </br>
+       { </br>
+       case 0://when count value is zero show”0” on </br>
+       disp digitalWrite(13, HIGH); digitalWrite(12, </br>
+       HIGH); digitalWrite(11, HIGH); digitalWrite(10, </br>
+       HIGH); digitalWrite(9, HIGH); …
+[2:20 PM, 5/13/2023] Krithik Raj SEC: #include <LiquidCrystal.h> </br>
+#define trigger 10 </br>
+#define echo 11 </br>
+#define motor 8 </br>
+#define buzzer 12 </br>
+#define led1 9 </br>
+#define led2 13 </br>
+#define led3 1 </br>
+LiquidCrystal lcd(7,6,5,4,3,2); </br>
+float time=0,distance=0; int </br>
+temp=0; void setup() </br>
+{
+lcd.begin(16,2); </br>
+pinMode(trigger,OUTPUT); </br>
+pinMode(echo,INPUT); pinMode(motor, </br>
+OUTPUT); pinMode(buzzer, OUTPUT); </br>
+pinMode(led1, OUTPUT); </br>
+pinMode(led2, OUTPUT); </br>
+pinMode(led3, OUTPUT); </br>
+} </br>
+void loop() </br>
+{ lcd.clear(); </br>
+digitalWrite(trigger,LOW); </br>
+delayMicroseconds(2); </br>
+digitalWrite(trigger,HIGH); </br>
+delayMicroseconds(10); </br>
+digitalWrite(trigger,LOW); </br>
+delayMicroseconds(2); </br>
+time=pulseIn(echo,HIGH); </br>
+distance=time*340/20000; </br>
+lcd.clear(); </br>
+lcd.print("AWL CONTROL"); </br>
+delay(2000); if(distance<500); </br>
+{ </br>
+digitalWrite(motor, LOW); </br>
+digitalWrite(led1, HIGH); </br>
+lcd.clear(); lcd.print("Water </br>
+Tank Full "); </br>
+lcd.setCursor(0,1); </br>
+lcd.print("Motor Turned </br>
+OFF"); delay(5000); </br>
+digitalWrite(led1, LOW); </br>
+} </br>
+else if(distance>500 && distance<750) </br>
+{ </br>
+digitalWrite(motor, LOW); </br>
+digitalWrite(led2, HIGH); </br>
+lcd.clear(); lcd.print("Water Tank </br>
+Full "); lcd.setCursor(0,1); </br>
+lcd.print("Motor Turned OFF"); </br>
+delay(5000); digitalWrite(led2, </br>
+LOW); </br>
+} </br>
+
+else if(distance>750) </br>
+{ </br>
+ digitalWrite(motor, HIGH); </br>
+ digitalWrite(buzzer, HIGH); </br>
+ digitalWrite(led3, HIGH); </br>
+ lcd.clear(); lcd.print("LOW </br>
+ Water Level"); </br>
+ lcd.setCursor(0,1); </br>
+ lcd.print("Motor Turned ON"); </br>
+ delay(5000); </br>
+ digitalWrite(buzzer, LOW); </br>
+ digitalWrite(led3, LOW); </br>
+} </br>
+}
+
 ## CIRCUIT DIAGRAM:
 
+![image](https://github.com/akiakash1/Interfacing-Seven-Segment-Display/assets/132885484/66147d5d-d7b4-4e91-82cf-e68c3196c5f4)
+
 ## OUTPUT:
+
+![image](https://github.com/akiakash1/Interfacing-Seven-Segment-Display/assets/132885484/49d5de70-d7c6-47d0-9ca6-de941d3fef4b)
 
 ## RESULT:
 Thus the characters and numbers are displayed in the seven segment display using Arduino UNO controller
